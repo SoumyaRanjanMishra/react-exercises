@@ -137,3 +137,159 @@ concatArrays([1,2], [3,4], [5,6]);  // [1,2,3,4,5,6]
 // 2. Destructuring
 // --------------------------------------------------------------------------------------------
 
+/**
+ * (i) What will be the output?
+ */
+
+function f() {
+  return [2, 5, 6];
+}
+let a, b;
+[a , , b] = f();
+
+console.log(a);  // 2
+console.log(b);  // 6
+
+
+/**
+ * (ii) Write expression for destructuring below object without variable declaration
+ */
+
+// Original
+let obj = { a: 2, b: 4 };
+
+// Modified
+let {a, b} = { a: 2, b: 4 };
+
+
+/**
+ * (iii) Write expression for destructuring below object, 
+ * extract company, name, age, state, spouse name
+ * Note : Assign to new variable names and provide default values for company and state
+ */
+
+// Original:
+let data = {
+  role:"Engineer",
+  company:"SR",
+  personal: {
+    name:"Sumit",
+    age:25,
+    country:"IND",
+    state:undefined,
+    spouse: {
+      name:"Reena"
+    }
+  }
+};
+
+let {
+      company: companyName = 'Sapient', 
+      personal: {
+        name,
+        spouse: {
+          name: spouseName
+        },
+        age,
+        state = 'Karnataka'
+      }
+    } = data;
+
+console.table({companyName, name, age, state, spouseName});
+
+
+/**
+ * (iv) Write an example of destructuring inside the for-of loop 
+ *      for below list to create a new list of objects with
+ *      only name and company properties
+ */
+
+let arr = [
+  {name:"Mike", age :25, role:"Engineer", company:"SR"},
+  {name:"Sam", age :27, role:"Senior Engineer", company:"SR"} ,
+  {name:"Peter", age :28, role:"Senior Program Manager", company:"SR"}
+];
+
+let newArr = [];
+
+for({name, company} of arr) {
+  newArr.push({name, company});
+}
+
+console.table(newArr);
+
+
+/**
+ * (v) Write expression for destructuring below object, extract children name
+ */
+
+let data = {
+  role:"Engineer",
+  company:"SR",
+  personal: {
+    name:"Sumit",
+    age:25,
+    country:"IND",
+    state:undefined,
+    children:[{
+      name:"Mayank"
+    }]
+  }
+};
+
+let { personal: { children: [ { name: childrenName } ] } } = data;
+
+console.log(companyName);
+
+
+/**
+ * (vi) Write a function to show destructuring for objects passed as function parameter
+ */
+
+getInfo = ({name, age}, {company, designation}) => {
+  console.table({name, age, company, designation});
+}
+
+const personalInfo = {
+  name: 'soumya',
+  age: 30
+};
+
+const companyInfo = {
+  company: 'Sapient',
+  designation: 'Senior Associate'
+};
+
+getInfo(personalInfo, companyInfo);
+
+
+/**
+ * (vii) Write examples to show rest param usage in array and object destructuring
+ */
+
+// ------------------------------------------
+// Rest parameter usage in array
+// ------------------------------------------
+
+const arr = [1, 2, 3, 4, 5, 6];
+
+const [first, second, ...rest] = arr;
+
+console.log(first, second); // 1 2
+console.log(rest);          // [3,4,5,6]
+
+// ------------------------------------------
+// Rest parameter in object destructuring
+// ------------------------------------------
+
+const test = (...[a,b,c]) => {
+  console.log(a, b, c);
+}
+
+console.groupCollapsed('Test Data');
+
+test(1, 2);         // 1 2 undefined
+test(1, 2, 3);      // 1 2 3
+test(1, 2, 3, 4,);  // 1 2 3
+
+console.groupEnd();

@@ -1,2 +1,2 @@
 # react-exercises
-SoW Es6 and React Exercises
+SoW ES6 and React Exercises

@@ -293,3 +293,19 @@ test(1, 2, 3);      // 1 2 3
 test(1, 2, 3, 4,);  // 1 2 3
 
 console.groupEnd();
+
+// ------------------------------------------
+// Nested Rest parameter in object destructuring
+// ------------------------------------------
+
+const test = (...[a,b,c,...d]) => {
+  console.log(a, b, c, d);
+}
+
+console.groupCollapsed('Nested Rest');
+
+test(1, 2);           // 1 2 undefined []
+test(1, 2, 3);        // 1 2 3 []
+test(1, 2, 3, 4, 5);  // 1 2 3 [4, 5]
+
+console.groupEnd();
